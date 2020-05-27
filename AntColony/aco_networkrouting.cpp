@@ -7,7 +7,7 @@
 #include <cmath>
 #include <fstream>
 
-#define numNodes 11
+#define numNodes 30
 #define numAnts 100
 #define maxTime 100
 #define infinity 9999
@@ -125,7 +125,7 @@ void InitAnts(vector<int> ants[numAnts])
                 j--;
             }
 
-            if (r == 10)
+            if (r == numNodes-1)
             {
                 break;
             }
@@ -265,7 +265,7 @@ void BuildTrail(int k, int start, double pheromones[][numNodes], int dist[][numN
         trail.push_back(next);
         visited[next] = true;
 
-        if (next == 10)
+        if (next == numNodes-1)
         {
             break;
         }
