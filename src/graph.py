@@ -3,15 +3,15 @@ from collections import defaultdict
 from graphValue import graph
 from graph200 import graph200
 class Edge:
-	def __init__(self, src, dst, bw):
+	def __init__(self, src, dst, w):
 		self.src = src
 		self.dst = dst
-		self.bw = bw
+		self.w = w
 
 class Vertex:
-	def __init__(self, dst = 0, bw = 0):
+	def __init__(self, dst = 0, w = 0):
 		self.dst = dst
-		self.bw = bw
+		self.w = w
 
 class Graph:
 	def __init__(self):
@@ -20,8 +20,8 @@ class Graph:
 	def findNeighbor(self, u):
 		return self.graph[u]
 
-	def addEdge(self, u, v, bw):
-		self.graph[u].append(Vertex(v, bw))
+	def addEdge(self, u, v, w):
+		self.graph[u].append(Vertex(v, w))
 
 	def exists(self, x, y):
 		vertices = self.graph[x]
@@ -30,24 +30,13 @@ class Graph:
 				return True
 		return False
 
-	def createSparseG(self):
-		V = 100
+	def createGraph(self, V):
+	
 		for i in range(V):
 			for j in range(V):
-					self.addEdge(i, j, graph200[i][j])
-					self.addEdge(j, i, graph200[j][i])
+				self.graph[i].append(Vertex(j, graph200[i][j]))
+				self.graph[j].append(Vertex(i, graph200[j][i]))
 
-	def createDenseG(self):
-		V = 5000
-		deg = 0.2*V
-
-		for i in range(int(V/2)):
-			while len(self.graph[i]) < deg:
-				v_rand = random.randint(0, V-1)
-				if (v_rand != i) and self.exists(i, v_rand) == False and len(self.graph[v_rand]) < deg:
-					w = random.randint(1, 1000)
-					self.addEdge(i, v_rand, w)
-					self.addEdge(v_rand, i, w)
 
 
 

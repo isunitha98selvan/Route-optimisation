@@ -10,15 +10,15 @@ class Heap:
 	def maximum(self):
 		return self.heap[0].dst
 	
-	def insert(self, v, bw):
+	def insert(self, v, w):
 		if len(self.heap) == V:
 			return
 
-		node = Vertex(v, bw)
+		node = Vertex(v, w)
 		self.heap.append(node)
 		i = len(self.heap) - 1
 		self.pos[v] = i
-		while (i != 0 and self.heap[self.parent(i)].bw < self.heap[i].bw):
+		while (i != 0 and self.heap[self.parent(i)].w < self.heap[i].w):
 			self.heap[i], self.heap[self.parent(i)] = self.heap[self.parent(i)], self.heap[i]
 			self.pos[self.heap[i].dst] = i
 			self.pos[self.heap[self.parent(i)].dst] = self.parent(i)
@@ -45,9 +45,9 @@ class Heap:
 		left = 2*i+1
 		right = 2*i+2
 
-		if (left < len(self.heap) and self.heap[left].bw > self.heap[maxVal].bw):
+		if (left < len(self.heap) and self.heap[left].w > self.heap[maxVal].w):
 			maxVal = left
-		if (right < len(self.heap) and self.heap[right].bw > self.heap[maxVal].bw):
+		if (right < len(self.heap) and self.heap[right].w > self.heap[maxVal].w):
 			maxVal = right
 		if (maxVal != i):
 			self.heap[maxVal], self.heap[i] = self.heap[i], self.heap[maxVal]
