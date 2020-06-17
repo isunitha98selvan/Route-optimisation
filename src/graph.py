@@ -1,6 +1,7 @@
 import random
 from collections import defaultdict
-
+from graphValue import graph
+from graph200 import graph200
 class Edge:
 	def __init__(self, src, dst, bw):
 		self.src = src
@@ -30,14 +31,11 @@ class Graph:
 		return False
 
 	def createSparseG(self):
-		V = 5000
-		for i in range(int(V/2)):
-			while len(self.graph[i]) < 6:
-				v_rand = random.randint(0, V-1)
-				if (v_rand != i) and self.exists(i, v_rand) == False and len(self.graph[v_rand]) < 6:
-					w = random.randint(1, 1000)
-					self.addEdge(i, v_rand, w)
-					self.addEdge(v_rand, i, w)
+		V = 100
+		for i in range(V):
+			for j in range(V):
+					self.addEdge(i, j, graph200[i][j])
+					self.addEdge(j, i, graph200[j][i])
 
 	def createDenseG(self):
 		V = 5000

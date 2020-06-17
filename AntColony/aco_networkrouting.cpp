@@ -7,7 +7,7 @@
 #include <cmath>
 #include <fstream>
 
-#define numNodes 30
+#define numNodes 200
 #define numAnts 100
 #define maxTime 100
 #define infinity 9999
@@ -387,11 +387,13 @@ int main()
     f << endl;
     for (int i = 0; i < numNodes; i++)
     {
+        f << "[";
         for (int j = 0; j < numNodes; j++)
         {
             f << dist[i][j];
-            f << " ";
+            f << " ,";
         }
+        f << "]" ;
         f << endl;
     }
 // printdist(dist);

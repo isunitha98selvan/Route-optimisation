@@ -8,14 +8,17 @@ from dijkstraAlgo import dijkstra, dijkstraHeap
 from kruskalAlgo import kruskal
 
 def main():
-	if(len(sys.argv) != 3):
-		print("Arg1: Contains 1 for sparse graph testing or 2 for dense graph gesting")
-		print("Arg2: Contains numeric int value for number of trials testing") 
-		return
+	# if(len(sys.argv) != 3):
+	# 	print("Arg1: Contains 1 for sparse graph testing or 2 for dense graph gesting")
+	# 	print("Arg2: Contains numeric int value for number of trials testing") 
+	# 	return
 
-	menu = int(sys.argv[1])
-	trials = int(sys.argv[2])
-	V = 5000
+	# menu = int(sys.argv[1])
+	# trials = int(sys.argv[2])
+	# V = 5000
+	menu = 1
+	trials = 1
+	V = 100
 
 	if (menu == 1):
 		print("Sparse Graph Testing")
@@ -24,15 +27,13 @@ def main():
 		start = time.time()
 		G.createSparseG()
 		end = time.time()
+		print(G.graph)
 		elapsedTimeG = end-start
 		print("Time_SparseG: ", elapsedTimeG)
 
 		for i in range(trials):
-			srcV = random.randint(0, V-1)
-			dstV = random.randint(0, V-1)
-
-			if srcV == dstV:
-				continue
+			srcV = 0
+			dstV = V-1
 
 			# Print source and destination pair
 			print(srcV, " : ", dstV)
@@ -42,6 +43,7 @@ def main():
 			max_D = dijkstra(G, srcV, dstV)
 			end = time.time()
 			elapsedTimeD = end-start
+			
 			print("Time_D: ", elapsedTimeD)
 
 			#Testing Dijkstra's Algorithm with Heap structure
@@ -58,10 +60,10 @@ def main():
 			elapsedTimeK = end-start
 			print("Time_K: ", elapsedTimeK)
 
-			# Prints Maximum Bandwidth Path for each algorithm
-			# print("Max_D: ", max_D)
-			# print("Max_DH: ", max_DH)
-			# print("Max_K: ", max_K)
+			#Prints Maximum Bandwidth Path for each algorithm
+			print("Max_D: ", max_D)
+			print("Max_DH: ", max_DH)
+			print("Max_K: ", max_K)
 
 			print("TRIAL: ", i+1, " DONE")
 
