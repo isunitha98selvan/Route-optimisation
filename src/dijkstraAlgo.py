@@ -33,6 +33,7 @@ def dijkstraHeap(G, s, t, V):
 	print("Path taken is")
 	print(path)
 	print("-------------------------")
+	G.failed = []
 
 	return distances[t]
 
@@ -47,10 +48,7 @@ def djikstraNodeFail(G,s,t,V):
 			while val in failed:
 				val = random.randint(1,V-2)
 			G.failed.append(val)
-	G.failed.append(2)
-	G.failed.append(39)
 	print(G.failed)
-	
 	return dijkstraHeap(G,s,t,V)
 	
 

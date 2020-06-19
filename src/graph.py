@@ -1,7 +1,7 @@
 import random
 from collections import defaultdict
 from graphValue import graph
-from graph200 import graph200
+import generate_graph
 class Edge:
 	def __init__(self, src, dst, w):
 		self.src = src
@@ -16,6 +16,7 @@ class Vertex:
 class Graph:
 	def __init__(self):
 		self.graph = defaultdict(list)
+		self.arr = None
 		self.failed = []
 
 	def findNeighbor(self, u):
@@ -33,11 +34,13 @@ class Graph:
 	
 
 	def createGraph(self, V):
-	
+		g = generate_graph.generate(V)
+		self.arr = g
 		for i in range(V):
 			for j in range(V):
-				self.graph[i].append(Vertex(j, graph200[i][j]))
-				self.graph[j].append(Vertex(i, graph200[j][i]))
+				if i != j:
+					self.graph[i].append(Vertex(j, g[i][j]))
+					self.graph[j].append(Vertex(i, g[j][i]))
 
 
 

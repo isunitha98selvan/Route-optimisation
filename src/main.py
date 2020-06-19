@@ -7,10 +7,10 @@ from graph import Graph, Vertex, Edge
 from dijkstraAlgo import *
 from backtracking import ibacktracking
 from kruskalAlgo import kruskal
-
+from AntColonyRO import antColony
 def main():
 
-	V = 98
+	V = 20
 	G = Graph()
 	G.createGraph(V)
 
@@ -39,6 +39,13 @@ def main():
 	end = time.time()
 	elapsedTimeDH = end-start
 	print("Time taken by Djikstra's algorithm: with node failure ", elapsedTimeDH)
+
+	#Testing Kruskal's Algorithm  with Heapsort
+	start = time.time()
+	antColony(V,G.arr)
+	end = time.time()
+	elapsedTimeK = end-start
+	# print("Time taken by Kruskal's algorithm: ", elapsedTimeK)
 
 	#Testing Kruskal's Algorithm  with Heapsort
 	start = time.time()

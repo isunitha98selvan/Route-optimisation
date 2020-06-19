@@ -4,8 +4,8 @@ import graphValue
 import graph200
 import time
 
-numNodes = 10     # Change this to graph200 for more nodes
-numAnts = 100
+numNodes = 20   # Change this to graph200 for more nodes
+numAnts = 20
 maxTime = 100
 infinity = 9999
 
@@ -14,17 +14,6 @@ alpha = 3 # influence of pheromone in direction
 beta = 2 # influence of adjacent node distance
 rho = 0.01 # pheromone decrease factor
 Q = 2.0 # pheromone increase factor
-
-# def Graph(dist): #[numNodes][numNodes]
-#     random.seed(42)
-#     for i in range(numNodes):
-#         for j in range(numNodes):
-#             if j == i:
-#                 dist[i][j] = infinity
-#             else:
-#                 d = random.randint(0,32767) % 10 + 1
-#                 dist[i][j] = d
-#                 dist[j][i] = d
 
 def printants(ants):
     for i in range(numAnts):#(i = 0; i < numAnts; i++)
@@ -191,8 +180,9 @@ def Display(besttrail):
     for i in range(len(besttrail)):
         print(besttrail[i], " ")
 
-def main():
-    dist=graphValue.graph                                   # Change this to graph200 for more nodes
+def antColony(num,graph):
+    numNodes = num
+    dist=graph                                # Change this to graph200 for more nodes
     ants_1 = [[] for j in range(numAnts)] 
     InitAnts(ants_1)
     ShowLength(ants_1, dist)
@@ -233,5 +223,3 @@ def main():
     end = time.time()
     print(end -start)
     print("\nLength of Best trail found: ",bestlength)
-
-main()
