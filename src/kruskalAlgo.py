@@ -3,18 +3,12 @@ import sys
 import heapq 
 from graph import Graph, Vertex, Edge
 from MakeUnionFind import MakeUnionFind
-V = 5000
-
-# Algorithm status codes:
-# In-Tree = 0
-# Fringe = 1
-# Unseen = 2
+V = 98	
 
 def heapify(E, i, n):
 	maxVal = i
 	left = 2*i+1
 	right = 2*i+2
-
 	if (left < n and E[left].w > E[maxVal].w):
 		maxVal = left
 	if (right < n and E[right].w > E[maxVal].w):
@@ -30,11 +24,11 @@ def heapSort(G, E):
 			if (n.dst >= v):
 				E.append(Edge(v, n.dst, n.w))
 
-	n_val = len(E)
-	for i in range(int(n_val/2)-1, -1, -1):
-		heapify(E, i, n_val)
+	n = len(E)
+	for i in range(int(n/2)-1, -1, -1):
+		heapify(E, i, n)
 
-	for i in range(n_val-1, -1, -1):
+	for i in range(n-1, -1, -1):
 		E[0], E[i] = E[i], E[0]
 		heapify(E, 0, i)
 
@@ -66,22 +60,26 @@ def path(G, s, t):
 		t = parent[t]
 		i += 1
 	pathTrace[i] = s
-
+	n = i
+	print("Path taken is ")
+	for j in range(n+1):
+		print(pathTrace[j], end=" ")
+	print("\n")
 	return maxw
 
 
 def kruskal(G, s, t):
-	edges = list()
+	edges = []
 	heapSort(G, edges)
 	muf = MakeUnionFind(V)
-	newG = Graph()
+	graph = Graph()
 	for i in range(len(edges)-1, -1, -1):
 		e = edges[i]
 		source = muf.Find(e.src)
-		destiny = muf.Find(e.dst)
-		if source != destiny:
-			newG.addEdge(e.src, e.dst, e.w)
-			newG.addEdge(e.dst, e.src, e.w)
-			muf.Union(source, destiny)
+		dest = muf.Find(e.dst)
+		if source != dest:
+			graph.addEdge(e.src, e.dst, e.w)
+			graph.addEdge(e.dst, e.src, e.w)
+			muf.Union(source, dest)
 
-	return path(newG, s, t)
+	return path(graph, s, t)
