@@ -4,13 +4,13 @@ import sys
 import time
 
 from graph import Graph, Vertex, Edge
-from dijkstraAlgo import dijkstraHeap
+from dijkstraAlgo import *
 from backtracking import ibacktracking
 from kruskalAlgo import kruskal
 
 def main():
 
-	V = 100
+	V = 98
 	G = Graph()
 	G.createGraph(V)
 
@@ -32,6 +32,14 @@ def main():
 	elapsedTimeDH = end-start
 	print("Time taken by Djikstra's algorithm: ", elapsedTimeDH)
 
+
+	#Testing Dijkstra's Algorithm with Node failure
+	start = time.time()
+	max_DF = djikstraNodeFail(G, srcV, dstV, V)
+	end = time.time()
+	elapsedTimeDH = end-start
+	print("Time taken by Djikstra's algorithm: with node failure ", elapsedTimeDH)
+
 	#Testing Kruskal's Algorithm  with Heapsort
 	start = time.time()
 	max_K = kruskal(G, srcV, dstV)
@@ -42,6 +50,7 @@ def main():
 	#Prints Maximum Bandwidth Path for each algorithm
 	print("Max bandwidth Improved Backtracking algorithm: ", max_D)
 	print("Max bandwidth Dijkstra's Algorithm: ", max_DH)
+	print("Max bandwidth Dijkstra's Algorithm with node failure: ", max_DF)
 	print("Max bandwidth Kruskal's algorithm : ", max_K)
 
 if __name__ == "__main__":

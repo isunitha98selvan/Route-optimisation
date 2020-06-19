@@ -16,6 +16,7 @@ class Vertex:
 class Graph:
 	def __init__(self):
 		self.graph = defaultdict(list)
+		self.failed = []
 
 	def findNeighbor(self, u):
 		return self.graph[u]
@@ -29,6 +30,7 @@ class Graph:
 			if v.dst == y:
 				return True
 		return False
+	
 
 	def createGraph(self, V):
 	
