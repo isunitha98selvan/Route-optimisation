@@ -1,7 +1,9 @@
 import sys
 import random
+import graphValue
+import graph200
 
-numNodes = 11
+numNodes = len(graphValue.graph)      # Change this to graph200 for more nodes
 numAnts = 100
 maxTime = 100
 infinity = 9999
@@ -12,16 +14,16 @@ beta = 2 # influence of adjacent node distance
 rho = 0.01 # pheromone decrease factor
 Q = 2.0 # pheromone increase factor
 
-def Graph(dist): #[numNodes][numNodes]
-    random.seed(42)
-    for i in range(numNodes):
-        for j in range(numNodes):
-            if j == i:
-                dist[i][j] = infinity
-            else:
-                d = random.randint(0,32767) % 10 + 1
-                dist[i][j] = d
-                dist[j][i] = d
+# def Graph(dist): #[numNodes][numNodes]
+#     random.seed(42)
+#     for i in range(numNodes):
+#         for j in range(numNodes):
+#             if j == i:
+#                 dist[i][j] = infinity
+#             else:
+#                 d = random.randint(0,32767) % 10 + 1
+#                 dist[i][j] = d
+#                 dist[j][i] = d
 
 def printants(ants):
     for i in range(numAnts):#(i = 0; i < numAnts; i++)
@@ -189,8 +191,7 @@ def Display(besttrail):
         print(besttrail[i], " ")
 
 def main():
-    dist = [[0 for i in range(numNodes)] for j in range(numNodes)] 
-    Graph(dist)
+    dist=graphValue.graph                                       # Change this to graph200 for more nodes
     ants_1 = [[] for j in range(numAnts)] 
     InitAnts(ants_1)
     ShowLength(ants_1, dist)
