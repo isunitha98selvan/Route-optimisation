@@ -1,5 +1,5 @@
 class Vertex:
-	def __init__(self, w=0,traffic=0):
+	def __init__(self, id=0,traffic=0):
 		self.alive = True
-		self.w = w
+		self.id = id
 		self.traffic = traffic
