@@ -16,7 +16,7 @@ def main():
     weights = generate_weights(nodes)
     graph = distances
     graph[0][9] = 99999999
-    dist = djikstras.dijkstra(graph,0,9,10)
+    dist = djikstras.nodeFailureDjikstras(graph,0,9,10, vertices)
     print(dist)
 main()
 
