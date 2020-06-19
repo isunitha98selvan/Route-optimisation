@@ -9,9 +9,10 @@ class Edge:
 		self.w = w
 
 class Vertex:
-	def __init__(self, dst = 0, w = 0):
+	def __init__(self, dst = 0, w = 0, traffic=0):
 		self.dst = dst
 		self.w = w
+		self.traffic = traffic
 
 class Graph:
 	def __init__(self):
@@ -32,15 +33,19 @@ class Graph:
 				return True
 		return False
 	
-
 	def createGraph(self, V):
 		g = generate_graph.generate(V)
 		self.arr = g
 		for i in range(V):
 			for j in range(V):
+<<<<<<< HEAD
 				if i != j:
 					self.graph[i].append(Vertex(j, g[i][j]))
 					self.graph[j].append(Vertex(i, g[j][i]))
+=======
+				self.graph[i].append(Vertex(j, graph200[i][j],random.randint(0,100)))
+				self.graph[j].append(Vertex(i, graph200[j][i],random.randint(0,100)))
+>>>>>>> 532fa47a091defc2f933a3c107b58e2121e42af4
 
 
 
