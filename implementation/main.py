@@ -5,6 +5,7 @@ from distances import distances
 import time
 from kruskals import kruskal
 from aco import aco
+
 def generate_weights(n):
     weights = [[random.randint(1,100) for i in range(n)] for j in range(n)]
     return weights
@@ -45,7 +46,8 @@ def main():
     aco(nodes)
     end = time.time()
     print("Time taken is ", end-start)
-
+    print("--------------------------------")
+   
 
 main()
 
