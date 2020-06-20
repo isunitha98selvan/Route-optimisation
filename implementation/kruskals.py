@@ -80,11 +80,11 @@ def formShortestPath(path,src,dest):
             path.remove([nextNode,src,minWeight])
         formShortestPath(path,nextNode,dest)
 
-def main(nodes,src,dest):
+def kruskal(nodes,src,dest, distances):
     G = Graph(nodes)
     for i in range(nodes):
         for j in range(nodes):
-            if distances[i][j]!=0:
+            if distances[i][j] !=0.0:
                 G.addEdge(i,j,distances[i][j])
     
     path = G.kruskal(src)
@@ -94,5 +94,3 @@ def main(nodes,src,dest):
     print("Shortest path from source to destination")
     formShortestPath(path,src,dest)
 
-if __name__=='__main__':
-    main(10, 2,7)

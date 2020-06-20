@@ -26,7 +26,7 @@ def dijkstra(graph, source, dest, numNodes, vertices):
         path.append(node)
         node = parent[node]
     path.append(source)
-   
+    print("Path taken")
     print(path)
     for i in range(len(vertices)):
         if vertices[i].alive == False:

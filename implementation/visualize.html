@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+
+    <style type="text/css">
+        #mynetwork {
+            width: 1000px;
+            height: 700px;
+            border: 1px solid lightgray;
+        }
+    </style>
+</head>
+<body>
+<div id="mynetwork"></div>
+<script type="text/javascript" src="distancesJS.js"></script> 
+<script type="text/javascript">
+    // create an array with nodes
+    var arr,i,j;
+    arr = [];
+    var edgeArr = [];
+    for(i = 0; i < 75; i++){
+        arr.push({id: i, label: 'Node ' + i.toString()})
+       
+    }
+    // for(i = 0; i < 75; i++){
+    //     for(j = i; j < 75; j++){
+    //         if(distances[i][j] >0) {
+    //         edgeArr.push({from: i, to: j, color: 'red'})
+    //         }
+    //     }
+    // }
+
+    var nodes = new vis.DataSet(arr);
+    
+   
+    // create an array with edges
+    var edges = new vis.DataSet(edgeArr);
+
+    // create a network
+    var container = document.getElementById('mynetwork');
+
+    // provide the data in the vis format
+    var data = {
+        nodes: nodes,
+        edges: edges
+    };
+    var options = {
+        width: '1000px',
+        height: '700px',
+
+        interaction:{
+        hover: true
+        },
+        nodes: {
+            shape: 'circle'
+        }
+    };
+
+    // initialize your network!
+    var network = new vis.Network(container, data, options);
+</script>
+</body>
+</html>
