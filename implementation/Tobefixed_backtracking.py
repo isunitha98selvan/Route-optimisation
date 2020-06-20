@@ -1,7 +1,8 @@
    
 # from distances import distances
 from temp import distances
-   
+
+global all_paths
 all_paths = []
 
 def dfs(source,dest,numNodes):
@@ -17,7 +18,7 @@ def findPath(source, dest, visited, path):
     if source == dest: 
         print(path)
         all_paths.append(path)
-        print(all_paths)
+        # print(all_paths)
     else: 
     # If current vertex is not destination Recur for all the vertices adjacent to this vertex 
         for i in range(len(distances[source])): 
@@ -51,3 +52,4 @@ def printAllPaths(source, dest, numNodes):
 s = 2 ; d = 3
 print("Following are all different paths from %d to %d :" %(s, d)) 
 (dfs(s, d,4))
+print(all_paths)
