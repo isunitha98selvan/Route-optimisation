@@ -35,20 +35,25 @@ def dijkstra(graph, source, dest, numNodes, vertices):
 
 
 def nodeFailureDjikstras(graph, source, dest, numNodes, vertices):
-    num = numNodes-4
+    num = numNodes-10
+    failed = []
     for _ in range(num):
         val = random.randint(1,numNodes-2)
-        if not vertices[val].alive == True:
+        if vertices[val].alive == True:
             vertices[val].alive = False
+            failed.append(val)
         else:
             while vertices[val].alive == False:
                 val = random.randint(1,numNodes-2)
             vertices[val].alive = False
+            failed.append(val)
 
-   
+    print("Nodes that have failed are", failed)
+    
     return dijkstra(graph, source, dest, numNodes, vertices)
 
 def dijkstraPacketTraffic(graph, source, dest, numNodes, vertices):
+    print("Considering packet traffic at each node")
     distances = [float('infinity') for i in range(numNodes)]
     distances[source] = 0
 
