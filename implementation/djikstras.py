@@ -28,12 +28,14 @@ def dijkstra(graph, source, dest, numNodes, vertices):
     path.append(source)
    
     print(path)
-
+    for i in range(len(vertices)):
+        if vertices[i].alive == False:
+            vertices[i].alive = True
     return distances
 
 
 def nodeFailureDjikstras(graph, source, dest, numNodes, vertices):
-    num = numNodes//2
+    num = numNodes-4
     for _ in range(num):
         val = random.randint(1,numNodes-2)
         if not vertices[val].alive == True:
@@ -43,5 +45,39 @@ def nodeFailureDjikstras(graph, source, dest, numNodes, vertices):
                 val = random.randint(1,numNodes-2)
             vertices[val].alive = False
 
+   
     return dijkstra(graph, source, dest, numNodes, vertices)
 
+def dijkstraPacketTraffic(graph, source, dest, numNodes, vertices):
+    distances = [float('infinity') for i in range(numNodes)]
+    distances[source] = 0
+
+    distanceWeight = [float('infinity') for i in range(numNodes)]
+    distanceWeight[source] = 0 
+
+    pq = [(0,0, source)]
+    parent = [-1 for i in range(numNodes)]
+    while len(pq) > 0:
+        current_distance, tempDist, current_vertex = heapq.heappop(pq)
+
+        if current_distance > distanceWeight[current_vertex]:
+            continue
+
+        for i in range(numNodes): #Iterate through neighbours
+            if(i == current_vertex or graph[current_vertex][i] == 0.0): continue
+            distance = current_distance + (graph[current_vertex][i]*2 + vertices[i].traffic*3)
+            distanceWithoutWeight = tempDist + graph[current_vertex][i]
+            if distance < distanceWeight[i]:
+                distanceWeight[i] = distance
+                distances[i] = distanceWithoutWeight
+                heapq.heappush(pq, (distance, distanceWithoutWeight, i))
+                parent[i] = current_vertex
+    path = []
+    node = dest
+    while node != source:
+        path.append(node)
+        node = parent[node]
+    path.append(source)
+   
+    print(path)
+    return distances
