@@ -1,4 +1,3 @@
-from distances import distances
 import sys
 from collections import defaultdict
 
@@ -35,7 +34,6 @@ class Graph:
 	def kruskal(self,src):
 		path = []
 		e = 0
-		
 		source_edges = []
 		self.edges =  sorted(self.edges,key=lambda item: item[2])
 		for i in range(len(self.edges)):
@@ -62,51 +60,19 @@ class Graph:
 				self.union(parent, rank, x, y)       
 		return path
 	
-# def formShortestPath(path,src,dest):
-# 	minWeight = 99999999
-# 	nextNode = -1
-# 	flag = 0
-# 	print("Path: ",src)
-# 	if src!=dest:
-# 		for u,v,w in path:
-# 			if u == src or v==src:
-# 				if w<minWeight:
-# 					minWeight = w
-# 					if u==src:
-# 						nextNode =v
-# 						flag = 1
-# 					else:
-# 						nextNode = u
-# 						flag = -1
-		
-# 		if flag==1:
-# 			# print([src,nextNode,minWeight])
-# 			path.remove([src,nextNode,minWeight])
-# 		elif flag == -1:
-# 			# print([nextNode,src,minWeight])
-# 			path.remove([nextNode,src,minWeight])
-# 		else:
-# 			print("It is not part of MST")
-# 			return
-# 		formShortestPath(path,nextNode,dest)
-
 def DFS(G,MST, s, t, status, parent, w):
 	if s == t:
 		return
 	status[s] = 1
 	for v in G.findNeighbor(s):
-		# print("Printing neighbours of ",s)
-		# print([s,v[0],v[1]])
 		if [s,v[0],v[1]] in MST or [v[0],s,v[1]] in MST:			
 			if status[v[0]]==2:
-				# print("Going from", s,v[0])
-				# w[v[0]]=min(w[s],v[1])
 				parent[v[0]]=s
 				DFS(G,MST,v[0],t,status,parent,w)
 	status[s] = 0
 	return
 
-def path(G,MST, s, t,nodes):
+def path(G,MST, s, t,nodes,distances):
 	status = [2]*nodes
 	parent = [-1]*nodes
 	w = [0]*nodes
@@ -115,9 +81,6 @@ def path(G,MST, s, t,nodes):
 
 	DFS(G,MST, s, t, status, parent, w)
 	pathTrace = [0]*nodes
-	# print(len(parent))
-	# for i in range(len(parent)):
-	# 	print(i,parent[i])
 	i = 0
 	while t != s:
 		maxw = min(maxw, w[t])
@@ -132,12 +95,11 @@ def path(G,MST, s, t,nodes):
 		print(pathTrace[j], end=" ")
 		if j!=n:
 			cost+=distances[pathTrace[j]][pathTrace[j+1]]
-			# print("cost:",cost)
 	print("\n")
 	print("cost: ",cost)
 	return maxw
 
-def kruskal(nodes,src,dest, distances):
+def kruskal(nodes,src,dest,distances):
 	print("Source: ",src)
 	print("Destination: ",dest)
 	G = Graph(nodes)
@@ -146,11 +108,4 @@ def kruskal(nodes,src,dest, distances):
 			if distances[i][j] !=0.0:
 				G.addEdge(i,j,distances[i][j])	
 	MST = G.kruskal(src)
-	# print("Minimum Spanning Tree")
-	# for u,v,w in MST:
-	# 	print(u,v,"weight: ",w)
-	# print("Shortest path from source to destination")
-	# formShortestPath(path,src,dest)
-	path(G,MST,src,dest,nodes)
-
-# kruskal(10,0,9,distances)
+	path(G,MST,src,dest,nodes,distances)

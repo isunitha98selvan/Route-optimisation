@@ -1,7 +1,7 @@
 
 from sys import maxsize 
 import numpy as np
-from distances75 import distances
+from data.distances75 import distances
 
 Inf = 999999.0
 
@@ -19,6 +19,7 @@ def BellmanFord(graph, V,src,dest):
     print("Minimum Distance from Source: " + str(src) + " to destination " + str(dest) + " is:") 
     print(dis[dest])
     return dis[dest]
+
 if __name__ == "__main__": 
     V = 75 # Number of vertices in graph 
    

@@ -1,5 +1,5 @@
 import pytholog as pl
-from distances import distances
+from data.distances import distances
 from djikstras import dijkstra
 from vertex import Vertex
 import time

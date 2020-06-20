@@ -3,7 +3,7 @@ import math
 import sys
 import argparse
 import time
-from distances import distances
+
 class Graph(object):
     def __init__(self, adj_matrix, rank):
         self.matrix = adj_matrix
@@ -97,7 +97,7 @@ def calc_distance(site1, site2):
     return math.sqrt((site1['x'] - site2['x'])**2 +
                      (site1['y'] - site2['y'])**2)
 
-def aco(rank):
+def aco(rank,distances):
     for i in range(rank): 
         for j in range(rank):
             if distances[i][j]==0:
