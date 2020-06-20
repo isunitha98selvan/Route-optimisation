@@ -3,31 +3,26 @@ from sys import maxsize
 import numpy as np
 from distances75 import distances
 
-def BellmanFord(graph, V, E, src): 
+Inf = 999999.0
+
+def BellmanFord(graph, V,src,dest): 
     
     dis = [maxsize] * V 
     dis[src] = 0
-    for i in range(V - 1): 
-        for j in range(E): 
-            if dis[graph[j][0]] + graph[j][2] < dis[graph[j][1]]: 
-                dis[graph[j][1]] = dis[graph[j][0]] + graph[j][2] 
   
-    for i in range(E): 
-        x = graph[i][0] 
-        y = graph[i][1] 
-        weight = graph[i][2] 
-        if dis[x] != maxsize and dis[x] + weight < dis[y]: 
-            print("Graph contains negative weight cycle") 
+    for i in range(V):
+        for j in range(V): 
+                if i!=j and graph[i][j]!= 0:
+                    if dis[i]!=maxsize and dis[i] + graph[i][j] < dis[j]:
+                        dis[j] = dis[i] + graph[i][j]
   
-    print("Vertex Distance from Source") 
-    for i in range(V): 
-        print("%d\t\t%d" % (i, dis[i])) 
-  
+    print("Minimum Distance from Source: " + str(src) + " to destination " + str(dest) + " is:") 
+    print(dis[dest])
+    return dis[dest]
 if __name__ == "__main__": 
     V = 75 # Number of vertices in graph 
-    E = V*V # Number of edges in graph 
-        
+   
     arr = np.array(distances)
     graph=arr.astype(int)
     print(len(graph))
-    BellmanFord(graph, V, E, 0)
+    BellmanFord(graph, V, 0,74)
