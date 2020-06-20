@@ -36,10 +36,10 @@ def main():
     print(dist3[nodes-1])
     print("Time taken is ", end-start)
     print("--------------------------------")
-    start = time.time()
-    kruskal(nodes,0,nodes-1, graph)
-    end = time.time()
-    print("Time taken is ", end-start)
+    # start = time.time()
+    # kruskal(nodes,0,nodes-1, graph)
+    # end = time.time()
+    # print("Time taken is ", end-start)
 
 main()
 
