@@ -8,9 +8,11 @@ We compare the Dijkstra's algorithm, Kruskal's algo, Bellman Ford (RIP), Ant Col
 The data folder has the graph data that we have used. Helper folder has helper functions and the visualisation file.  
 
 To run the code:  
-## cd implementation
-## python3 main.py
-
+```
+cd implementation
+python3 main.py
+```
 To run the bfs module:  
-## python3 bfs.py
-
+```
+python3 bfs.py
+```
