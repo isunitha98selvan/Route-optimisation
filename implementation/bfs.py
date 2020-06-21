@@ -1,35 +1,36 @@
 import pytholog as pl
-from data.distances import distances
-from djikstras import dijkstra
+from data.distances75 import distances
 from vertex import Vertex
 import time
 import heapq
+import random
 
+numNodes = 50
+distances[0][numNodes-1] = 0.0
 start = time.time()
 graph_kb = pl.KnowledgeBase("Shortest path in a network")
 arr = []
-for i in range(len(distances[0])):
-    for j in range(len(distances[0])):
+for i in range(numNodes):
+    for j in range(50):
         if distances[i][j] != 0.0 and i!=j:
             route =  "route(p" + str(i) + ",p" + str(j) + "," + str(distances[i][j]) + ")"
             arr.append(route)
+    
 
 arr.append("path(X, Y, P) :- route(X, Y, P)")
 arr.append("path(X, Y, P) :- route(X, Z, P2), path(Z, Y, P3), P is P2 + P3")
 # arr.append("path(X, Y, P) :- route(Y, Z, P2), path(Z, X, P3), P is P2 + P3")
 graph_kb(arr)
 
-x, y = graph_kb.query(pl.Expr("path(p0,p74, Weight)"), cut = True, show_path = True)
-print(x)
+x, y = graph_kb.query(pl.Expr("path(p0,p49, Weight)"), cut = True, show_path = True)
 nodes = [x for x in y if str(x) > "Z"] ## remove weights in the visited nodes
 traversed = []
 for i in nodes:
     traversed.append(int(i[1:]))
-print(traversed)
 traversed.append(0)
-traversed.append(74)
+traversed.append(numNodes-1)
 source = 0
-numNodes = 75
+
 
 dist = [float('infinity') for i in range(numNodes)]
 dist[source] = 0
@@ -56,6 +57,7 @@ while node != source:
     path.append(node)
     node = parent[node]
 path.append(source)
+print(dist[numNodes-1])
 print("Path taken")
 print(path)
 

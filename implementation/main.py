@@ -5,6 +5,7 @@ from data.distances75 import distances
 import time
 from kruskals import kruskal
 from aco import aco
+from bellman_ford import BellmanFord
 
 def generate_weights(n):
     #can be used to generate additional parameters if required 
@@ -12,7 +13,7 @@ def generate_weights(n):
     return weights
 
 def main():
-    nodes = 75
+    nodes = 50
     vertices =[]
     source = 0
     destination = nodes-1
@@ -40,7 +41,7 @@ def main():
     print("Time taken is ", end-start)
     print("--------------------------------")
     start = time.time()
-    kruskal(nodes,source,destination,distances)
+    kruskal(nodes,source,destination,graph)
     end = time.time()
     print("Time taken is ", end-start)
     print("--------------------------------")
@@ -49,6 +50,7 @@ def main():
     end = time.time()
     print("Time taken is ", end-start)
     print("--------------------------------")
+    
    
 if __name__=='__main__':
     main()
